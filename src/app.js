@@ -1,6 +1,7 @@
 //gerando um ola mundo
 const express = require('express');
 const app = express();
+app.use(express.json());
 
 app.get('/', function(req, res){
 
@@ -10,9 +11,9 @@ app.get('/', function(req, res){
 })
 
 app.post('/pessoa', function (req, res){
-    console.log(req);
+    console.log(req.body);
     res.json({
-        "statusCode":200
+        "statusCode": 200
     })
 
 
