@@ -1,6 +1,6 @@
 //gerando um ola mundo
 // import {openDb} from './configDB.js'
-import { createTable,insertPessoa,updatePessoa } from "./Controller/Pessoa.js";
+import { createTable,insertPessoa,updatePessoa, selectPessoas, selectPessoa } from "./Controller/Pessoa.js";
 
 import express from "express";
 const app = express();
@@ -9,13 +9,26 @@ app.use(express.json());
 createTable();
 
 app.get("/", function (req, res) {
-  res.send("Ola mundo");
+  res.send("Api Rodando");
 });
+
+app.get("/pessoas", async function (req, res) {
+  let pessoas = await selectPessoas();
+   res.json(pessoas);
+ 
+});
+
+app.get("/pessoa", async function (req, res) {
+  let pessoa = await selectPessoa(req.body);
+   res.json(pessoa);
+ 
+});
+
 
 app.post("/pessoa", function (req, res) {
    insertPessoa(req.body);
    res.json({
-     statusCode: 200,
+     statusCode: 200
    });
 });
 

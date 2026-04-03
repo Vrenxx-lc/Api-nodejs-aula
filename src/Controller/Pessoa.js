@@ -17,3 +17,17 @@ export async function updatePessoa(pessoa) {
     db.run('UPDATE Pessoa SET nome = ?, idade = ?, email = ?, telefone = ? WHERE id = ?', [pessoa.nome, pessoa.idade, pessoa.email, pessoa.telefone, pessoa.id]);
     });    
 }
+
+export async function selectPessoas() {
+    return openDb().then(db => {
+        return db.all('SELECT * FROM Pessoa')
+        .then(res=>res)
+    });    
+}
+
+export async function selectPessoa(id) {
+    return openDb().then(db => {
+        return db.get('SELECT * FROM Pessoa WHERE id = ?', [id])
+        .then(res=>res)
+    });    
+}
